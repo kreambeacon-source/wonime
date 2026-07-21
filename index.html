@@ -4,52 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NontonAnime - Portal Streaming</title>
-    <!-- SCRIPT WAJIB DESAIN (JANGAN TERPOTONG) -->
-    <script src="https://tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cloudflare.com">
+    <!-- GAYA DESAIN INTERNAL - ANTI GAGAL LOAD -->
+    <style>
+        body { background-color: #0f0f12; color: #f3f4f6; font-family: sans-serif; margin: 0; padding: 0; }
+        nav { background-color: #1e1e24; padding: 15px; border-b: 1px solid #2d3748; display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: #ff4757; font-weight: 900; font-size: 20px; text-decoration: none; letter-spacing: 1px; }
+        .badge { background-color: rgba(34, 197, 94, 0.2); color: #4ade80; font-size: 11px; font-weight: bold; padding: 4px 8px; rounded: 4px; border-radius: 4px; }
+        .container { padding: 15px; max-width: 800px; margin: 0 auto; }
+        .player-box { background-color: #1e1e24; padding: 15px; border-radius: 12px; border: 1px solid #2d3748; margin-bottom: 20px; }
+        .video-wrapper { position: relative; width: 100%; aspect-ratio: 16/9; background-color: #000; border-radius: 8px; overflow: hidden; }
+        iframe { width: 100%; height: 100%; border: none; }
+        .judul { font-size: 18px; font-weight: bold; margin-top: 12px; margin-bottom: 4px; color: #fff; }
+        .sub-judul { font-size: 12px; color: #9ca3af; margin: 0; }
+        .btn-eps { width: 100%; text-align: left; background-color: #ff4757; color: white; padding: 12px; border: none; border-radius: 8px; font-size: 13px; font-weight: bold; margin-bottom: 8px; cursor: pointer; display: flex; justify-content: space-between; }
+        .btn-eps-off { width: 100%; text-align: left; background-color: #1e1e24; color: #d1d5db; padding: 12px; border: 1px solid #2d3748; border-radius: 8px; font-size: 13px; font-weight: bold; margin-bottom: 8px; cursor: pointer; display: flex; justify-content: space-between; }
+        .genre-box { background-color: #1e1e24; padding: 10px 15px; border-radius: 8px; display: inline-block; margin-right: 8px; margin-bottom: 8px; font-size: 12px; font-weight: bold; border: 1px solid #2d3748; }
+    </style>
 </head>
-<body class="bg-[#0f0f12] text-gray-100 font-sans min-h-screen">
+<body>
 
-    <!-- NAV BAR -->
-    <nav class="bg-[#1e1e24] border-b border-gray-800 p-4 flex justify-between items-center">
-        <a href="#" class="text-xl font-black text-[#ff4757] tracking-wider">
-            <i class="fa-solid fa-play-circle mr-1"></i> NONTONANIME
-        </a>
-        <span class="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">SERVER ONLINE</span>
+    <nav>
+        <a href="#" class="logo">▶ NONTONANIME</a>
+        <span class="badge">SERVER ONLINE</span>
     </nav>
 
-    <!-- CONTAINER UTAMA -->
-    <main class="p-4 space-y-6 max-w-4xl mx-auto">
-
-        <!-- PEMUTAR VIDEO INTERAKTIF -->
-        <section class="bg-[#1e1e24] p-4 rounded-xl border border-gray-800 shadow-xl space-y-4">
-            <div class="relative w-full aspect-video bg-black rounded-lg overflow-hidden border border-gray-800">
-                <iframe id="main-player" class="w-full h-full" src="https://youtube.com" frameborder="0" allowfullscreen></iframe>
+    <div class="container">
+        <!-- PLAYER -->
+        <div class="player-box">
+            <div class="video-wrapper">
+                <iframe id="main-player" src="https://youtube.com" allowfullscreen></iframe>
             </div>
-            <div>
-                <h1 id="video-title" class="text-lg font-bold text-white">Demon Slayer: Kimetsu no Yaiba - Episode 01</h1>
-                <p class="text-xs text-gray-400 mt-1">Status: <span class="text-green-400">Ongoing</span> | Sub: Indo</p>
-            </div>
-        </section>
+            <div class="judul" id="video-title">Demon Slayer: Kimetsu no Yaiba - Episode 01</div>
+            <p class="sub-judul">Status: <span style="color:#4ade80">Ongoing</span> | Subtitle: Indonesia</p>
+        </div>
 
-        <!-- DAFTAR EPISODE -->
-        <section class="space-y-3">
-            <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider"><i class="fa-solid fa-list text-[#ff4757] mr-2"></i>Pilih Episode:</h3>
-            <div class="grid grid-cols-1 gap-2">
-                <button onclick="putar('Demon Slayer: Kimetsu no Yaiba - Episode 01', 'https://youtube.com')" class="w-full text-left bg-[#ff4757] text-white p-3 rounded-lg text-xs font-bold flex justify-between items-center">
-                    <span>Eps 01: Perjalanan Dimulai</span>
-                    <i class="fa-solid fa-circle-play"></i>
-                </button>
-                <button onclick="putar('Demon Slayer: Kimetsu no Yaiba - Episode 02', 'https://youtube.com')" class="w-full text-left bg-[#1e1e24] text-gray-300 p-3 rounded-lg text-xs font-bold flex justify-between items-center border border-gray-800">
-                    <span>Eps 02: Pelatih Sakonji</span>
-                    <i class="fa-regular fa-circle-play text-gray-500"></i>
-                </button>
-            </div>
-        </section>
+        <!-- EPISODE -->
+        <h3 style="font-size: 14px; color: #9ca3af; text-transform: uppercase;">Pilih Episode:</h3>
+        <button onclick="putar('Demon Slayer: Kimetsu no Yaiba - Episode 01', 'https://youtube.com')" class="btn-eps">
+            <span>Eps 01: Perjalanan Dimulai</span> <span>▶</span>
+        </button>
+        <button onclick="putar('Demon Slayer: Kimetsu no Yaiba - Episode 02', 'https://youtube.com')" class="btn-eps-off">
+            <span>Eps 02: Pelatih Sakonji Urokodaki</span> <span>🔲</span>
+        </button>
 
-    </main>
+        <!-- GENRE -->
+        <h3 style="font-size: 14px; color: #9ca3af; text-transform: uppercase; margin-top: 25px;">Genre Populer:</h3>
+        <div class="genre-box">⚔️ Action</div>
+        <div class="genre-box">🧙‍♂️ Isekai</div>
+        <div class="genre-box">🤣 Comedy</div>
+    </div>
 
-    <!-- JAVASCRIPT SYSTEM -->
     <script>
         function putar(judul, linkVideo) {
             document.getElementById('video-title').innerText = judul;
