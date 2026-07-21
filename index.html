@@ -1,100 +1,107 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NontonAnime - Portal Streaming Pro</title>
-    <style>
-        body { background-color: #0f0f12; color: #f3f4f6; font-family: sans-serif; margin: 0; padding: 0; }
-        nav { background-color: #1e1e24; padding: 15px; border-bottom: 1px solid #2d3748; display: flex; justify-content: space-between; align-items: center; }
-        .logo { color: #ff4757; font-weight: 900; font-size: 20px; text-decoration: none; letter-spacing: 1px; }
-        .badge { background-color: rgba(34, 197, 94, 0.2); color: #4ade80; font-size: 11px; font-weight: bold; padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(74, 222, 128, 0.2); }
-        .container { padding: 15px; max-width: 800px; margin: 0 auto; }
-        
-        /* PEMUTAR VIDEO BARU (HTML5 VIDEO) */
-        .player-box { background-color: #1e1e24; padding: 15px; border-radius: 12px; border: 1px solid #2d3748; margin-bottom: 20px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3); }
-        .video-wrapper { position: relative; width: 100%; aspect-ratio: 16/9; background-color: #000; border-radius: 8px; overflow: hidden; }
-        .judul { font-size: 16px; font-weight: bold; margin-top: 12px; margin-bottom: 4px; color: #fff; }
-        .sub-judul { font-size: 12px; color: #9ca3af; margin: 0; }
-        
-        /* DAFTAR EPISODE */
-        .section-title { font-size: 13px; color: #9ca3af; text-transform: uppercase; letter-spacing: 1px; margin-top: 20px; margin-bottom: 10px; font-weight: bold; }
-        .grid-eps { display: grid; grid-template-cols: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; margin-bottom: 25px; }
-        
-        /* TOMBOL INTERAKTIF */
-        .btn-eps { background-color: #1e1e24; color: #d1d5db; padding: 12px; border: 1px solid #2d3748; border-radius: 8px; font-size: 12px; font-weight: bold; cursor: pointer; text-align: center; transition: all 0.2s ease; }
-        .btn-eps:hover { background-color: #ff4757; color: white; border-color: #ff4757; }
-        .btn-eps.active { background-color: #ff4757; color: white; border-color: #ff4757; box-shadow: 0 4px 6px -1px rgba(255, 71, 87, 0.2); }
-        
-        /* GENRE */
-        .genre-box { background-color: #1e1e24; padding: 10px 15px; border-radius: 8px; display: inline-block; margin-right: 6px; margin-bottom: 8px; font-size: 11px; font-weight: bold; border: 1px solid #2d3748; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wonime Stream</title>
+
+  <!-- PWA Settings -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1e293b">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0f172a;
+      color: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #1e293b;
+      padding: 1rem 2rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: #38bdf8;
+    }
+    main {
+      flex: 1;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .welcome-card {
+      background-color: #1e293b;
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid #334155;
+    }
+    .welcome-card h2 {
+      margin-bottom: 1rem;
+      color: #f1f5f9;
+    }
+    .welcome-card p {
+      color: #94a3b8;
+      margin-bottom: 1.5rem;
+    }
+    .btn {
+      display: inline-block;
+      background-color: #2563eb;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
+    .btn:hover {
+      background-color: #1d4ed8;
+    }
+    footer {
+      background-color: #0f172a;
+      border-top: 1px solid #1e293b;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.875rem;
+      color: #64748b;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- NAV BAR -->
-    <nav>
-        <a href="#" class="logo">▶ NONTONANIME</a>
-        <span class="badge">SERVER ONLINE</span>
-    </nav>
+  <header>
+    <h1>Wonime Stream</h1>
+  </header>
 
-    <div class="container">
-        <!-- PLAYER UTAMA -->
-        <div class="player-box">
-            <div class="video-wrapper">
-                <!-- MENGGUNAKAN TAG VIDEO ASLI (ANTI-BLOKIR YOUTUBE) -->
-                <video id="main-player" src="https://googleapis.com" controls style="width:100%; height:100%; object-fit:cover;"></video>
-            </div>
-            <div class="judul" id="video-title">Menampilkan: Episode 01 (Uji Coba Sukses)</div>
-            <p class="sub-judul">Status: <span style="color:#4ade80">Ongoing</span> | Kualitas: HD | Sub: Indo</p>
-        </div>
-
-        <!-- DAFTAR 12 EPISODE -->
-        <div class="section-title">Daftar Episode Singel (Total 12)</div>
-        <div class="grid-eps">
-            <!-- NOMOR 3: Link video pengujian dari server cloud publik (.mp4) -->
-            <button id="eps-1" onclick="putar('Menampilkan: Episode 01 (Uji Coba Sukses)', 'https://googleapis.com', this)" class="btn-eps active">Eps 01</button>
-            <button id="eps-2" onclick="putar('Menampilkan: Episode 02 (Uji Coba Sukses)', 'https://googleapis.com', this)" class="btn-eps">Eps 02</button>
-            
-            <!-- Episode kosong untuk latihan Anda nanti -->
-            <button onclick="putar('Menampilkan: Episode 03', 'LINK_VIDEO_DISINI', this)" class="btn-eps">Eps 03</button>
-            <button onclick="putar('Menampilkan: Episode 04', 'LINK_VIDEO_DISINI', this)" class="btn-eps">Eps 04</button>
-            <button onclick="putar('Menampilkan: Episode 05', 'LINK_VIDEO_DISINI', this)" class="btn-eps">Eps 05</button>
-            <button onclick="putar('Menampilkan: Episode 06', 'LINK_VIDEO_DISINI', this)" class="btn-eps">Eps 06</button>
-            <button onclick="putar('Menampilkan: Episode 07', 'LINK_VIDEO_DISINI', this)" class="btn-eps">Eps 07</button>
-            <button onclick="putar('Menampilkan: Episode 08', 'LINK_VIDEO_DISINI', this)" class="btn-eps">Eps 08</button>
-            <button onclick="putar('Menampilkan: Episode 09', 'LINK_VIDEO_DISINI', this)" class="btn-eps">Eps 09</button>
-            <button onclick="putar('Menampilkan: Episode 10', 'LINK_VIDEO_DISINI', this)" class="btn-eps">Eps 10</button>
-            <button onclick="putar('Menampilkan: Episode 11', 'LINK_VIDEO_DISINI', this)" class="btn-eps">Eps 11</button>
-            <button onclick="putar('Menampilkan: Episode 12 (TAMAT)', 'LINK_VIDEO_DISINI', this)" class="btn-eps">Eps 12</button>
-        </div>
-
-        <!-- GENRE POPULER -->
-        <div class="section-title">Genre Populer</div>
-        <div class="genre-box">⚔️ Action</div>
-        <div class="genre-box">🧙‍♂️ Isekai</div>
-        <div class="genre-box">🤣 Comedy</div>
+  <main>
+    <div class="welcome-card">
+      <h2>Selamat Datang di Wonime Stream</h2>
+      <p>Aplikasi streaming anime cepat, praktis, dan ramah pengguna.</p>
+      <a href="#" class="btn">Mulai Jelajah</a>
     </div>
+  </main>
 
-    <!-- NOMOR 4: JAVASCRIPT SYSTEM UNTUK MENGGANTI LINK FILMNYA -->
-    <script>
-        function putar(judul, linkVideo, elemenTombol) {
-            if(linkVideo === 'LINK_VIDEO_DISINI') {
-                alert("Episode ini belum diunggah oleh admin!");
-                return;
-            }
-            
-            // Mengubah Judul & mengganti sumber file video .mp4
-            document.getElementById('video-title').innerText = judul;
-            document.getElementById('main-player').src = linkVideo;
-            
-            // Logika memindahkan warna merah ke tombol yang aktif
-            var semuaTombol = document.getElementsByClassName('btn-eps');
-            for (var i = 0; i < semuaTombol.length; i++) {
-                semuaTombol[i].classList.remove('active');
-            }
-            elemenTombol.classList.add('active');
-        }
-    </script>
+  <footer>
+    &copy; 2026 Wonime Stream. All rights reserved.
+  </footer>
+
 </body>
 </html>
