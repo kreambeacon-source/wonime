@@ -96,6 +96,27 @@
       align-items: center;
     }
 
+    /* Player Video */
+    .video-section {
+      margin-bottom: 3rem;
+    }
+
+    .video-wrapper {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      background-color: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      display: block;
+      outline: none;
+    }
+
     /* Grid Daftar Anime */
     .anime-grid {
       display: grid;
@@ -199,6 +220,21 @@
   </header>
 
   <main>
+    <!-- Bagian Player Video (Testing) -->
+    <div class="video-section">
+      <div class="section-title">
+        <h3>Sedang Diputar (Testing)</h3>
+      </div>
+      <div class="video-wrapper">
+        <!-- Elemen HTML5 Video -->
+        <video controls poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg">
+          <!-- Source video format mp4 -->
+          <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+          Maaf, browser kamu tidak mendukung pemutaran video HTML5.
+        </video>
+      </div>
+    </div>
+
     <!-- Bagian Genre -->
     <div class="section-title">
       <h3>Eksplorasi Genre</h3>
@@ -222,23 +258,18 @@
 
   <!-- JavaScript untuk mengambil data secara dinamis -->
   <script>
-    // 1. Fungsi Mengambil Daftar Anime Terpopuler
     async function fetchTopAnime() {
       const container = document.getElementById('animeContainer');
       try {
-        // Menggunakan Jikan API (Gratis & Legal)
         const response = await fetch('https://api.jikan.moe/v4/top/anime?limit=12');
         const data = await response.json();
         
-        container.innerHTML = ''; // Kosongkan tulisan "Memuat..."
+        container.innerHTML = ''; 
         
         data.data.forEach(anime => {
-          // Mengambil 2 genre pertama
           const genres = anime.genres.slice(0, 2).map(g => g.name).join(', ');
-          
           const card = document.createElement('div');
           card.className = 'anime-card';
-          // Link diarahkan ke halaman resmi MyAnimeList anime tersebut
           card.onclick = () => window.open(anime.url, '_blank'); 
           
           card.innerHTML = `
@@ -259,7 +290,6 @@
       }
     }
 
-    // 2. Fungsi Menampilkan Daftar Genre Secara Manual
     function loadGenres() {
       const genreContainer = document.getElementById('genreContainer');
       const genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Fantasy', 'Romance', 'Sci-Fi', 'Slice of Life'];
@@ -272,7 +302,6 @@
       });
     }
 
-    // Jalankan fungsi saat halaman dimuat
     document.addEventListener('DOMContentLoaded', () => {
       loadGenres();
       fetchTopAnime();
