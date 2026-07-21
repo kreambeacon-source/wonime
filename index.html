@@ -3,125 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NontonAnime - Platform Streaming Gratis</title>
-    <!-- Tailwind CSS CDN -->
+    <title>NontonAnime - Portal Streaming</title>
+    <!-- SCRIPT WAJIB DESAIN (JANGAN TERPOTONG) -->
     <script src="https://tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cloudflare.com">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        animePrimary: '#ff4757',
-                        animeDark: '#0f0f12',
-                        animeCard: '#1e1e24',
-                    }
-                }
-            }
-        }
-    </script>
 </head>
-<body class="bg-animeDark text-gray-100 font-sans">
+<body class="bg-[#0f0f12] text-gray-100 font-sans min-h-screen">
 
-    <!-- NAVIGATION BAR -->
-    <nav class="bg-animeDark/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-800 px-6 py-4 flex items-center justify-between">
-        <div class="flex items-center gap-8">
-            <a href="#" class="text-2xl font-black text-animePrimary tracking-wider flex items-center gap-2">
-                <i class="fa-solid fa-play-circle"></i> NONTONANIME
-            </a>
-            <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-gray-400">
-                <a href="#" class="text-white hover:text-animePrimary transition">Home</a>
-                <a href="#streaming-player" class="hover:text-animePrimary transition">Player</a>
-                <a href="#genre" class="hover:text-animePrimary transition">Genre</a>
-            </div>
-        </div>
-        <div class="flex items-center gap-4">
-            <span class="bg-green-500/10 text-green-400 text-xs font-bold px-3 py-1 rounded-full border border-green-500/20 hidden sm:inline-block">
-                <i class="fa-solid fa-server mr-1"></i> Server Aktif
-            </span>
-        </div>
+    <!-- NAV BAR -->
+    <nav class="bg-[#1e1e24] border-b border-gray-800 p-4 flex justify-between items-center">
+        <a href="#" class="text-xl font-black text-[#ff4757] tracking-wider">
+            <i class="fa-solid fa-play-circle mr-1"></i> NONTONANIME
+        </a>
+        <span class="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">SERVER ONLINE</span>
     </nav>
 
-    <!-- MAIN CONTENT CONTAINER -->
-    <main class="px-4 md:px-16 py-8 space-y-12">
+    <!-- CONTAINER UTAMA -->
+    <main class="p-4 space-y-6 max-w-4xl mx-auto">
 
-        <!-- INTERACTIVE VIDEO PLAYER SECTION -->
-        <section id="streaming-player" class="grid grid-cols-1 lg:grid-cols-3 gap-6 bg-animeCard p-4 md:p-6 rounded-2xl border border-gray-800 shadow-xl">
-            <!-- Video Screen Component -->
-            <div class="lg:col-span-2 space-y-4">
-                <div class="relative w-full aspect-video bg-black rounded-xl overflow-hidden shadow-inner border border-gray-800">
-                    <!-- Placeholder embed player (Bisa diganti link video asli nanti) -->
-                    <iframe id="main-video-player" class="w-full h-full" src="https://youtube.com" title="Anime Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <div>
-                    <h1 id="playing-title" class="text-xl md:text-2xl font-black tracking-wide text-white">Demon Slayer: Kimetsu no Yaiba - Episode 01</h1>
-                    <p class="text-xs text-gray-400 mt-1">Genre: <span class="text-animePrimary">Action, Fantasy, Shounen</span> • Status: <span class="text-green-400">Ongoing</span></p>
-                </div>
+        <!-- PEMUTAR VIDEO INTERAKTIF -->
+        <section class="bg-[#1e1e24] p-4 rounded-xl border border-gray-800 shadow-xl space-y-4">
+            <div class="relative w-full aspect-video bg-black rounded-lg overflow-hidden border border-gray-800">
+                <iframe id="main-player" class="w-full h-full" src="https://youtube.com" frameborder="0" allowfullscreen></iframe>
             </div>
-
-            <!-- Playlist / Episode Selector Component -->
-            <div class="bg-black/30 rounded-xl p-4 border border-gray-800/50 flex flex-col h-full max-h-[450px]">
-                <h3 class="font-bold text-sm text-gray-300 border-b border-gray-800 pb-3 mb-3 flex items-center justify-between">
-                    <span><i class="fa-solid fa-list text-animePrimary mr-2"></i>Daftar Episode</span>
-                    <span class="text-xs bg-gray-800 px-2 py-0.5 rounded text-gray-400">Pilih Eps</span>
-                </h3>
-                <div class="space-y-2 overflow-y-auto pr-1 flex-1 custom-scrollbar">
-                    <!-- Episode Button 1 -->
-                    <button onclick="changeEpisode('Demon Slayer: Kimetsu no Yaiba - Episode 01', 'https://youtube.com')" class="w-full text-left bg-animePrimary text-white p-3 rounded-lg text-sm font-semibold flex items-center justify-between transition shadow-md shadow-animePrimary/10">
-                        <span>Eps 01: Awal Mula Perjalanan</span>
-                        <i class="fa-solid fa-circle-play"></i>
-                    </button>
-                    <!-- Episode Button 2 -->
-                    <button onclick="changeEpisode('Demon Slayer: Kimetsu no Yaiba - Episode 02', 'https://youtube.com')" class="w-full text-left bg-gray-800/60 hover:bg-gray-700 text-gray-300 p-3 rounded-lg text-sm font-medium flex items-center justify-between transition border border-gray-700/30">
-                        <span>Eps 02: Pelatih Sakonji Urokodaki</span>
-                        <i class="fa-regular fa-circle-play text-gray-500"></i>
-                    </button>
-                    <!-- Episode Button 3 -->
-                    <button onclick="changeEpisode('Solo Leveling - Episode 01', 'https://youtube.com')" class="w-full text-left bg-gray-800/60 hover:bg-gray-700 text-gray-300 p-3 rounded-lg text-sm font-medium flex items-center justify-between transition border border-gray-700/30">
-                        <span>Solo Leveling - Eps 01 (Bonus)</span>
-                        <i class="fa-regular fa-circle-play text-gray-500"></i>
-                    </button>
-                </div>
+            <div>
+                <h1 id="video-title" class="text-lg font-bold text-white">Demon Slayer: Kimetsu no Yaiba - Episode 01</h1>
+                <p class="text-xs text-gray-400 mt-1">Status: <span class="text-green-400">Ongoing</span> | Sub: Indo</p>
             </div>
         </section>
 
-        <!-- GENRE POPULER -->
-        <section id="genre" class="space-y-4">
-            <div class="border-l-4 border-animePrimary pl-3">
-                <h2 class="text-xl font-bold tracking-wide">Pilih Berdasarkan Genre</h2>
-            </div>
-            <div class="flex flex-wrap gap-2.5">
-                <span class="bg-animeCard hover:bg-animePrimary hover:text-white px-4 py-2.5 rounded-xl font-bold text-xs border border-gray-800 cursor-pointer transition">⚔️ Action</span>
-                <span class="bg-animeCard hover:bg-animePrimary hover:text-white px-4 py-2.5 rounded-xl font-bold text-xs border border-gray-800 cursor-pointer transition">🧙‍♂️ Isekai</span>
-                <span class="bg-animeCard hover:bg-animePrimary hover:text-white px-4 py-2.5 rounded-xl font-bold text-xs border border-gray-800 cursor-pointer transition">🤣 Comedy</span>
-                <span class="bg-animeCard hover:bg-animePrimary hover:text-white px-4 py-2.5 rounded-xl font-bold text-xs border border-gray-800 cursor-pointer transition">❤️ Romance</span>
+        <!-- DAFTAR EPISODE -->
+        <section class="space-y-3">
+            <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider"><i class="fa-solid fa-list text-[#ff4757] mr-2"></i>Pilih Episode:</h3>
+            <div class="grid grid-cols-1 gap-2">
+                <button onclick="putar('Demon Slayer: Kimetsu no Yaiba - Episode 01', 'https://youtube.com')" class="w-full text-left bg-[#ff4757] text-white p-3 rounded-lg text-xs font-bold flex justify-between items-center">
+                    <span>Eps 01: Perjalanan Dimulai</span>
+                    <i class="fa-solid fa-circle-play"></i>
+                </button>
+                <button onclick="putar('Demon Slayer: Kimetsu no Yaiba - Episode 02', 'https://youtube.com')" class="w-full text-left bg-[#1e1e24] text-gray-300 p-3 rounded-lg text-xs font-bold flex justify-between items-center border border-gray-800">
+                    <span>Eps 02: Pelatih Sakonji</span>
+                    <i class="fa-regular fa-circle-play text-gray-500"></i>
+                </button>
             </div>
         </section>
 
     </main>
 
-    <!-- FOOTER -->
-    <footer class="bg-black/40 border-t border-gray-800 px-6 md:px-16 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-gray-500">
-        <p>&copy; 2026 NontonAnime Pro. Powered by GitHub Pages.</p>
-        <div class="flex gap-4">
-            <a href="#" class="hover:text-white transition">Kebijakan Privasi</a>
-            <a href="#" class="hover:text-white transition">DMCA</a>
-        </div>
-    </footer>
-
-    <!-- INTERACTIVE JAVASCRIPT CONTROLLER -->
+    <!-- JAVASCRIPT SYSTEM -->
     <script>
-        function changeEpisode(title, videoUrl) {
-            // Mengubah Judul Streaming
-            document.getElementById('playing-title').innerText = title;
-            // Mengubah Source Video Player
-            document.getElementById('main-video-player').src = videoUrl;
-            
-            // Reset style semua tombol agar tidak aktif, lalu set tombol yang diklik menjadi merah (opsional/pengembangan kelak)
-            alert("Memutar: " + title);
+        function putar(judul, linkVideo) {
+            document.getElementById('video-title').innerText = judul;
+            document.getElementById('main-player').src = linkVideo;
         }
     </script>
 </body>
-          </html>
-          
+</html>
