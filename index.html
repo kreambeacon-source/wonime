@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wonime Stream</title>
-
+  <title>Wonime - Legal Anime Hub</title>
+  
   <!-- PWA Settings -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#1e293b">
@@ -15,93 +15,269 @@
   </script>
 
   <style>
+    /* Desain Dasar & Tema Gelap */
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --primary-color: #38bdf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+    
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #0f172a;
-      color: #f8fafc;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
     }
+
+    /* Navigasi / Header */
     header {
-      background-color: #1e293b;
-      padding: 1rem 2rem;
+      background-color: var(--card-bg);
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    
+    .logo span {
+      color: var(--text-main);
+    }
+    
+    .nav-menu {
+      display: flex;
+      gap: 1.5rem;
+    }
+    
+    .nav-menu a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    
+    .nav-menu a:hover {
+      color: var(--primary-color);
+    }
+
+    /* Area Konten Utama */
+    main {
+      padding: 2rem 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Judul Bagian */
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-left: 0.75rem;
+      border-left: 5px solid var(--primary-color);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    header h1 {
-      font-size: 1.5rem;
-      color: #38bdf8;
+
+    /* Grid Daftar Anime */
+    .anime-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
     }
-    main {
-      flex: 1;
-      padding: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      width: 100%;
-    }
-    .welcome-card {
-      background-color: #1e293b;
-      border-radius: 12px;
-      padding: 2rem;
-      text-align: center;
-      border: 1px solid #334155;
-    }
-    .welcome-card h2 {
-      margin-bottom: 1rem;
-      color: #f1f5f9;
-    }
-    .welcome-card p {
-      color: #94a3b8;
-      margin-bottom: 1.5rem;
-    }
-    .btn {
-      display: inline-block;
-      background-color: #2563eb;
-      color: white;
-      padding: 0.75rem 1.5rem;
+
+    /* Kartu Anime */
+    .anime-card {
+      background-color: var(--card-bg);
       border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+    
+    .anime-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    }
+
+    .anime-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .score-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #fbbf24;
+      color: #000;
+      font-weight: bold;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    .anime-info {
+      padding: 1rem;
+    }
+
+    .anime-title {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .anime-genres {
+      font-size: 0.8rem;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Daftar Genre (Chip style) */
+    .genre-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 3rem;
+    }
+
+    .genre-chip {
+      background-color: var(--card-bg);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      cursor: pointer;
       transition: background-color 0.2s;
     }
-    .btn:hover {
-      background-color: #1d4ed8;
+
+    .genre-chip:hover {
+      background-color: var(--primary-color);
+      color: #000;
     }
+
     footer {
-      background-color: #0f172a;
-      border-top: 1px solid #1e293b;
       text-align: center;
-      padding: 1rem;
-      font-size: 0.875rem;
-      color: #64748b;
+      padding: 2rem;
+      background-color: var(--card-bg);
+      color: var(--text-muted);
+      margin-top: auto;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Wonime Stream</h1>
+    <a href="#" class="logo">WONIME<span>STREAM</span></a>
+    <nav class="nav-menu">
+      <a href="#">Beranda</a>
+      <a href="#jadwal">Jadwal</a>
+      <a href="#koleksi">Koleksi Legal</a>
+    </nav>
   </header>
 
   <main>
-    <div class="welcome-card">
-      <h2>Selamat Datang di Wonime Stream</h2>
-      <p>Aplikasi streaming anime cepat, praktis, dan ramah pengguna.</p>
-      <a href="#" class="btn">Mulai Jelajah</a>
+    <!-- Bagian Genre -->
+    <div class="section-title">
+      <h3>Eksplorasi Genre</h3>
+    </div>
+    <div class="genre-list" id="genreContainer">
+      <!-- Genre akan dimuat menggunakan JavaScript -->
+    </div>
+
+    <!-- Bagian Anime Terpopuler -->
+    <div class="section-title">
+      <h3>Top Anime Musim Ini</h3>
+    </div>
+    <div class="anime-grid" id="animeContainer">
+      <p style="color: var(--text-muted);">Memuat data anime dari MyAnimeList (Jikan API)...</p>
     </div>
   </main>
 
   <footer>
-    &copy; 2026 Wonime Stream. All rights reserved.
+    <p>&copy; 2026 Wonime Stream. Anime Database menggunakan API Jikan.</p>
   </footer>
+
+  <!-- JavaScript untuk mengambil data secara dinamis -->
+  <script>
+    // 1. Fungsi Mengambil Daftar Anime Terpopuler
+    async function fetchTopAnime() {
+      const container = document.getElementById('animeContainer');
+      try {
+        // Menggunakan Jikan API (Gratis & Legal)
+        const response = await fetch('https://api.jikan.moe/v4/top/anime?limit=12');
+        const data = await response.json();
+        
+        container.innerHTML = ''; // Kosongkan tulisan "Memuat..."
+        
+        data.data.forEach(anime => {
+          // Mengambil 2 genre pertama
+          const genres = anime.genres.slice(0, 2).map(g => g.name).join(', ');
+          
+          const card = document.createElement('div');
+          card.className = 'anime-card';
+          // Link diarahkan ke halaman resmi MyAnimeList anime tersebut
+          card.onclick = () => window.open(anime.url, '_blank'); 
+          
+          card.innerHTML = `
+            <div class="score-badge">⭐ ${anime.score || 'N/A'}</div>
+            <img src="${anime.images.webp.large_image_url}" alt="${anime.title}">
+            <div class="anime-info">
+              <h4 class="anime-title" title="${anime.title}">${anime.title}</h4>
+              <div class="anime-genres">${genres}</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">
+                Ep: ${anime.episodes || '?'} | ${anime.status}
+              </div>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      } catch (error) {
+        container.innerHTML = '<p>Gagal memuat data anime. Silakan muat ulang halaman.</p>';
+      }
+    }
+
+    // 2. Fungsi Menampilkan Daftar Genre Secara Manual
+    function loadGenres() {
+      const genreContainer = document.getElementById('genreContainer');
+      const genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Fantasy', 'Romance', 'Sci-Fi', 'Slice of Life'];
+      
+      genres.forEach(genre => {
+        const chip = document.createElement('div');
+        chip.className = 'genre-chip';
+        chip.textContent = genre;
+        genreContainer.appendChild(chip);
+      });
+    }
+
+    // Jalankan fungsi saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', () => {
+      loadGenres();
+      fetchTopAnime();
+    });
+  </script>
 
 </body>
 </html>
