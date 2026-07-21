@@ -6,15 +6,14 @@
     <title>NontonAnime - Portal Streaming Pro</title>
     <style>
         body { background-color: #0f0f12; color: #f3f4f6; font-family: sans-serif; margin: 0; padding: 0; }
-        nav { background-color: #1e1e24; padding: 15px; border-bottom: 1px solid #2d3748; display: flex; justify-content: space-between; align-items: center; sticky: top; }
+        nav { background-color: #1e1e24; padding: 15px; border-bottom: 1px solid #2d3748; display: flex; justify-content: space-between; align-items: center; }
         .logo { color: #ff4757; font-weight: 900; font-size: 20px; text-decoration: none; letter-spacing: 1px; }
         .badge { background-color: rgba(34, 197, 94, 0.2); color: #4ade80; font-size: 11px; font-weight: bold; padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(74, 222, 128, 0.2); }
         .container { padding: 15px; max-width: 800px; margin: 0 auto; }
         
-        /* PEMUTAR VIDEO */
+        /* PEMUTAR VIDEO BARU (HTML5 VIDEO) */
         .player-box { background-color: #1e1e24; padding: 15px; border-radius: 12px; border: 1px solid #2d3748; margin-bottom: 20px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3); }
         .video-wrapper { position: relative; width: 100%; aspect-ratio: 16/9; background-color: #000; border-radius: 8px; overflow: hidden; }
-        iframe { width: 100%; height: 100%; border: none; }
         .judul { font-size: 16px; font-weight: bold; margin-top: 12px; margin-bottom: 4px; color: #fff; }
         .sub-judul { font-size: 12px; color: #9ca3af; margin: 0; }
         
@@ -43,21 +42,21 @@
         <!-- PLAYER UTAMA -->
         <div class="player-box">
             <div class="video-wrapper">
-                <!-- Video awal otomatis memutar Episode 1 (Video Uji Coba) -->
-                <iframe id="main-player" src="https://youtube.com" title="Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <!-- MENGGUNAKAN TAG VIDEO ASLI (ANTI-BLOKIR YOUTUBE) -->
+                <video id="main-player" src="https://googleapis.com" controls style="width:100%; height:100%; object-fit:cover;"></video>
             </div>
-            <div class="judul" id="video-title">Menampilkan: Episode 01 (Video Testing)</div>
+            <div class="judul" id="video-title">Menampilkan: Episode 01 (Uji Coba Sukses)</div>
             <p class="sub-judul">Status: <span style="color:#4ade80">Ongoing</span> | Kualitas: HD | Sub: Indo</p>
         </div>
 
         <!-- DAFTAR 12 EPISODE -->
         <div class="section-title">Daftar Episode Singel (Total 12)</div>
         <div class="grid-eps">
-            <!-- Episode 1 & 2 diisi video testing YouTube resmi -->
-            <button id="eps-1" onclick="putar('Menampilkan: Episode 01 (Video Testing)', 'https://youtube.com', this)" class="btn-eps active">Eps 01</button>
-            <button id="eps-2" onclick="putar('Menampilkan: Episode 02 (Video Musik Testing)', 'https://youtube.com', this)" class="btn-eps">Eps 02</button>
+            <!-- NOMOR 3: Link video pengujian dari server cloud publik (.mp4) -->
+            <button id="eps-1" onclick="putar('Menampilkan: Episode 01 (Uji Coba Sukses)', 'https://googleapis.com', this)" class="btn-eps active">Eps 01</button>
+            <button id="eps-2" onclick="putar('Menampilkan: Episode 02 (Uji Coba Sukses)', 'https://googleapis.com', this)" class="btn-eps">Eps 02</button>
             
-            <!-- Episode 3 s.d 12 disediakan kosong, silakan ganti teks 'LINK_VIDEO_DISINI' nanti -->
+            <!-- Episode kosong untuk latihan Anda nanti -->
             <button onclick="putar('Menampilkan: Episode 03', 'LINK_VIDEO_DISINI', this)" class="btn-eps">Eps 03</button>
             <button onclick="putar('Menampilkan: Episode 04', 'LINK_VIDEO_DISINI', this)" class="btn-eps">Eps 04</button>
             <button onclick="putar('Menampilkan: Episode 05', 'LINK_VIDEO_DISINI', this)" class="btn-eps">Eps 05</button>
@@ -77,20 +76,19 @@
         <div class="genre-box">🤣 Comedy</div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC CONTROLLER -->
+    <!-- NOMOR 4: JAVASCRIPT SYSTEM UNTUK MENGGANTI LINK FILMNYA -->
     <script>
         function putar(judul, linkVideo, elemenTombol) {
-            // 1. Cek jika link masih kosong
             if(linkVideo === 'LINK_VIDEO_DISINI') {
                 alert("Episode ini belum diunggah oleh admin!");
                 return;
             }
             
-            // 2. Ubah Judul & Jalankan Video
+            // Mengubah Judul & mengganti sumber file video .mp4
             document.getElementById('video-title').innerText = judul;
             document.getElementById('main-player').src = linkVideo;
             
-            // 3. Efek Visual: Pindahkan warna merah aktif ke tombol yang diklik
+            // Logika memindahkan warna merah ke tombol yang aktif
             var semuaTombol = document.getElementsByClassName('btn-eps');
             for (var i = 0; i < semuaTombol.length; i++) {
                 semuaTombol[i].classList.remove('active');
